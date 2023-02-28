@@ -68,6 +68,37 @@ ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.NoMissi
     }
     `,
     },
+    {
+      code: `
+    class MyComponent extends React.Component {
+      intersectionObserver = null;
+      intersectionElement = createRef();
+    
+      componentDidMount() {
+        const temp = new IntersectionObserver((entries) => {
+          // do things
+        });
+
+        temp.observe(this.intersectionElement.current);
+        this.intersectionObserver = temp
+      }
+    
+      componentWillUnmount() {
+        if (this.resizeObserver) {
+          this.intersectionObserver.unobserve(this.intersectionElement.current);
+        }
+      }
+    
+      render() {
+        return (
+          <div ref={this.intersectionElement}>
+            ...
+          </div>
+        );
+      }
+    }
+    `,
+    },
   ],
   invalid: [
     {

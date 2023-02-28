@@ -1,7 +1,29 @@
 import { Rule } from 'eslint';
-import { BaseCallExpression, Expression, MemberExpression, Identifier, SourceLocation } from 'estree';
-import { isNodeMemberExpression, isNodeIdentifier, parseMemberExpression, RuleType, getDescription } from '../utils';
-import merge = require("lodash/merge")
+import {
+  BaseCallExpression,
+  Expression,
+  MemberExpression,
+  Identifier,
+  SourceLocation,
+  VariableDeclarator,
+  NewExpression,
+  AssignmentExpression,
+} from 'estree';
+import {
+  isNodeMemberExpression,
+  isNodeIdentifier,
+  parseMemberExpression,
+  RuleType,
+  getDescription,
+  isNewExpression,
+} from '../utils';
+import merge = require('lodash/merge');
+
+enum ObserversTypes {
+  MutationObserver = 'MutationObserver',
+  ResizeObserver = 'ResizeObserver',
+  IntersectionObserver = 'IntersectionObserver',
+}
 
 enum MethodsType {
   OBSERVE = 'observe',
@@ -14,6 +36,12 @@ interface ObservedElements {
     [target: string]: {
       loc: SourceLocation;
     };
+  };
+}
+
+interface NewObservers {
+  [key: string]: {
+    loc: SourceLocation;
   };
 }
 
@@ -53,6 +81,36 @@ const reportNoMatchingUnobserveTarget = ({
     loc,
     message: `there isn't an unobserve invoke for ${element} with target ${targetObserve}`,
   });
+};
+
+const isNewObserver = (node: Expression): boolean => {
+  const newExpression: NewExpression = <NewExpression>node;
+  const identifier: Identifier = <Identifier>newExpression.callee;
+  const observerType = identifier?.name as ObserversTypes;
+  return [ObserversTypes.MutationObserver, ObserversTypes.IntersectionObserver, ObserversTypes.ResizeObserver].includes(
+    observerType
+  );
+};
+
+const assignmentExpressionListener = (newObservers: NewObservers) => (node: AssignmentExpression) => {
+  if (isNewExpression(node.right) && isNewObserver(node.right)) {
+    const left: MemberExpression = <MemberExpression>node.left;
+    const name = (<Identifier>left.property)?.name;
+    if(name) {
+      newObservers[name] = {
+        loc: node.loc,
+      };
+    }
+  }
+};
+
+const variableDeclaratorListener = (newObservers: NewObservers) => (node: VariableDeclarator) => {
+  if (node?.init && isNewExpression(node?.init) && isNewObserver(node?.init)) {
+    const variable: Identifier = <Identifier>node.id;
+    newObservers[variable.name] = {
+      loc: variable.loc,
+    };
+  }
 };
 
 const callExpressionListener = (methods: Methods) => (node: BaseCallExpression) => {
@@ -99,6 +157,16 @@ const programListener = (ruleName: RuleType, methods: Methods, context: Rule.Rul
   const unobserveMethods = methods[MethodsType.UNOBSERVE] ?? {};
   const disconnectMethods = methods[MethodsType.DISCONNECT] ?? {};
 
+  // console.log('GHOLA HOLA HOAL HOAL HOAL HOAL HOOA');
+
+  // console.log('1111 1111 1 11 1 1 1  1 1 1 1  11 ');
+  // console.log(observeMethods);
+  // console.log('2222 2 22 22 2 2 2 2 2 2 2 2  ');
+  // console.log(unobserveMethods);
+  // console.log('33 3 3 3 3 33 3 3 3 3 3 3 33 ');
+  // console.log(disconnectMethods);
+  // console.log('CHAU CHAU CHUA CHUA CHUA CHAU');
+
   Object.keys(observeMethods).forEach((element) => {
     const observed = observeMethods[element];
     const unobserved = unobserveMethods[element];
@@ -134,8 +202,12 @@ export const createRule = (ruleName: RuleType): Rule.RuleModule => ({
   },
   create: (context: Rule.RuleContext): Rule.RuleListener => {
     const methods: Methods = {};
-
+    const newObservers: NewObservers = {};
     return {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      'VariableDeclarator:exit': variableDeclaratorListener(newObservers),
+      'AssignmentExpression:exit': assignmentExpressionListener(newObservers),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       'CallExpression:exit': callExpressionListener(methods),

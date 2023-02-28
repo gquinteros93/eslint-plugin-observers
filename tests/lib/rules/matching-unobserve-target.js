@@ -8,7 +8,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.MatchingUnobserveTarget), {
   valid: [
-/*     {
+    {
       code: `
     class MyComponent extends React.Component {
       resizeObserver = null;
@@ -51,7 +51,7 @@ ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.Matchin
       }
     }
     `,
-    }, */
+    },
   ],
   invalid: [
     {
