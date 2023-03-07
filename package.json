@@ -5,7 +5,6 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --color",
     "test": "npm run build && node tests/lib/rules/no-missing-unobserve-or-disconnect.js && node tests/lib/rules/matching-unobserve-target.js"
   },
   "repository": {
