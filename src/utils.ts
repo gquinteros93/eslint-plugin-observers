@@ -1,10 +1,11 @@
-import { Expression, MemberExpression, Super, Identifier } from 'estree';
+import { Expression, MemberExpression, Super, Identifier, BaseNode } from 'estree';
 
 export enum RuleType {
   NoMissingUnobserveOrDisconnect = 'no-missing-unobserve-or-disconnect',
   MatchingUnobserveTarget = 'matching-unobserve-target',
 }
 
+export const isNewExpression = (node: Expression | Super): boolean => node?.type === 'NewExpression';
 export const isNodeIdentifier = (node: Expression | Super): boolean => node?.type === 'Identifier';
 export const isNodeMemberExpression = (node: Expression | Super): boolean => node?.type === 'MemberExpression';
 export const isNodeThisExpression = (node: Expression | Super): boolean => node?.type === 'ThisExpression';
