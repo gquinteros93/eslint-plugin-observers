@@ -64,4 +64,4 @@ We also support a "strict" settings which enabled all of the rules for you
 - [matching-unobserve-target](docs/rules/matching-unobserve-target.md)
 
 # Acknowledgments
-This package is based on [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners), most of the functions were reused or based on functions used in [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners). For that, that plugin deserves a lot of credit.
+This package is based on [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners), most of the functions were reused or based on functions used in [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners). Because of that, this plugin deserves a lot of credit.
