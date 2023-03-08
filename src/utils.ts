@@ -1,4 +1,4 @@
-import { Expression, MemberExpression, Super, Identifier, BaseNode } from 'estree';
+import { Expression, MemberExpression, Super, Identifier } from 'estree';
 
 export enum RuleType {
   NoMissingUnobserveOrDisconnect = 'no-missing-unobserve-or-disconnect',

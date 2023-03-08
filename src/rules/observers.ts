@@ -69,7 +69,7 @@ const reportMissingUnobserveOrDisconnect = ({
 }) => {
   context.report({
     loc,
-    message: `${element} does not have a corresponding Unobserve or Disconnnect`,
+    message: `${element} does not have a corresponding unobserve or disconnnect`,
   });
 };
 

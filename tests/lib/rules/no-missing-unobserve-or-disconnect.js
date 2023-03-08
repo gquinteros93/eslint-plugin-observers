@@ -159,7 +159,7 @@ ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.NoMissi
       `,
       errors: [
         {
-          message: 'this.resizeObserver does not have a corresponding Unobserve or Disconnnect',
+          message: 'this.resizeObserver does not have a corresponding unobserve or disconnnect',
         },
       ],
     },
@@ -193,7 +193,7 @@ ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.NoMissi
     `,
       errors: [
         {
-          message: 'this.intersectionObserver does not have a corresponding Unobserve or Disconnnect',
+          message: 'this.intersectionObserver does not have a corresponding unobserve or disconnnect',
         },
       ],
     },

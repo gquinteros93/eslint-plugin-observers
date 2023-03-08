@@ -6,7 +6,7 @@ const ruleTester = new RuleTester({
   parser: require.resolve('babel-eslint'),
 });
 
-ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.MatchingUnobserveTarget), {
+ruleTester.run('matching-unobserve-target', createRule(RuleType.MatchingUnobserveTarget), {
   valid: [
     {
       code: `
@@ -109,6 +109,8 @@ ruleTester.run('no-missing-unobserve-or-disconnect', createRule(RuleType.Matchin
       componentWillUnmount() {
         if (this.intersectionObserver) {
           this.intersectionObserver.unobserve(this.intersectionElement.current);
+        }
+        if (this.resizeObserver) {
           this.resizeObserver.unobserve(this.targetNode.current);
         }
       }
