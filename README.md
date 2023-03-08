@@ -5,13 +5,17 @@ ESLint plugin for preventing memory leaks around observers ([ResizeObserver](htt
 
 ## Installation
 
-You'll first need to install [ESLint](http://eslint.org):
+### You'll first need to install [ESLint](http://eslint.org):
 
 | npm | yarn | pnpm |
 | --- | ---- | ---- |
 | `npm i eslint --save-dev` | `yarn add eslint --dev` | `pnpm add eslint -D` |
 
-Next, install `eslint-plugin-observers`:
+### Next, install `eslint-plugin-observers`:
+
+| npm | yarn | pnpm |
+| --- | ---- | ---- |
+| `npm i eslint-plugin-observers --save-dev` | `yarn add eslint-plugin-observers --dev` | `pnpm add eslint-plugin-observers -D` |
 
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-observers` globally.
 
@@ -56,7 +60,4 @@ We also support a "strict" settings which enabled all of the rules for you
 
 
 # Acknowledgments
-
-This package is based on [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners)
-Most of the functions were reused or based on functions used in [eslint-plugin-listeners] (https://github.com/foad/eslint-plugin-listeners)
-That's why it deserves a lot of credits.
+This package is based on [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners), most of the functions were reused or based on functions used in [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners). For that, that plugin deserves a lot of credit.
