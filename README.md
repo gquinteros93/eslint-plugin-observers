@@ -58,6 +58,10 @@ We also support a "strict" settings which enabled all of the rules for you
 }
 ```
 
+# Rule Documentation
+
+- [no-missing-unobserve-or-disconnect](docs/rules/no-missing-unobserve-or-disconnect.md)
+- [matching-unobserve-target](docs/rules/matching-unobserve-target.md)
 
 # Acknowledgments
 This package is based on [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners), most of the functions were reused or based on functions used in [eslint-plugin-listeners](https://github.com/foad/eslint-plugin-listeners). For that, that plugin deserves a lot of credit.
