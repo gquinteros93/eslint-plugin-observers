@@ -9,13 +9,13 @@ ESLint plugin for preventing memory leaks around observers ([ResizeObserver](htt
 
 | npm | yarn | pnpm |
 | --- | ---- | ---- |
-| `npm i eslint --save-dev` | `yarn add eslint --dev` | `pnpm add eslint -D` |
+| `npm i eslint -D` | `yarn add eslint -D` | `pnpm add eslint -D` |
 
 ### Next, install `eslint-plugin-observers`:
 
 | npm | yarn | pnpm |
 | --- | ---- | ---- |
-| `npm i eslint-plugin-observers --save-dev` | `yarn add eslint-plugin-observers --dev` | `pnpm add eslint-plugin-observers -D` |
+| `npm i eslint-plugin-observers -D` | `yarn add eslint-plugin-observers -D` | `pnpm add eslint-plugin-observers -D` |
 
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-observers` globally.
 
