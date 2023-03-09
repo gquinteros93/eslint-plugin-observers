@@ -1,6 +1,6 @@
-import { createRule } from './rules/observers';
+import { createRule } from './rules/observers'
 
-import { RuleType } from './utils';
+import { RuleType } from './utils'
 
 module.exports = {
   rules: {
@@ -23,4 +23,4 @@ module.exports = {
       },
     },
   },
-};
+}
