@@ -1,18 +1,20 @@
-name: Test
+name: ci
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "main" ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Download dependencies
-      run: npm install
+      run: npm i
+    - name: Lint
+      run: npm run lint
     - name: Unit Test
       run: npm run test
