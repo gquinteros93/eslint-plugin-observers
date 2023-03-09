@@ -1,4 +1,4 @@
-import { Rule } from 'eslint';
+import { Rule } from "eslint";
 import {
   BaseCallExpression,
   Expression,
@@ -8,7 +8,7 @@ import {
   VariableDeclarator,
   NewExpression,
   AssignmentExpression,
-} from 'estree';
+} from "estree";
 import {
   isNodeMemberExpression,
   isNodeIdentifier,
@@ -16,19 +16,19 @@ import {
   RuleType,
   getDescription,
   isNewExpression,
-} from '../utils';
-import merge = require('lodash/merge');
+} from "../utils";
+import merge = require("lodash/merge");
 
 enum ObserversTypes {
-  MutationObserver = 'MutationObserver',
-  ResizeObserver = 'ResizeObserver',
-  IntersectionObserver = 'IntersectionObserver',
+  MutationObserver = "MutationObserver",
+  ResizeObserver = "ResizeObserver",
+  IntersectionObserver = "IntersectionObserver",
 }
 
 enum MethodsType {
-  OBSERVE = 'observe',
-  UNOBSERVE = 'unobserve',
-  DISCONNECT = 'disconnect',
+  OBSERVE = "observe",
+  UNOBSERVE = "unobserve",
+  DISCONNECT = "disconnect",
 }
 
 interface ObservedElements {
@@ -198,7 +198,7 @@ const programListener =
         switch (ruleName) {
           case RuleType.NoMissingUnobserveOrDisconnect:
             if (!unobserved && !disconnected && !assignedUnobserved && !assignedDisconnected) {
-              const reportedElement = assigned?.assigned ?? element
+              const reportedElement = assigned?.assigned ?? element;
               reportMissingUnobserveOrDisconnect({ context, element: reportedElement, loc });
             }
             break;
@@ -207,7 +207,7 @@ const programListener =
             if (unobserved && !unobserved[target]) {
               reportNoMatchingUnobserveTarget({ context, element, targetObserve: target, loc });
             } else if (assignedUnobserved && !assignedUnobserved[target]) {
-              const reportedElement = assigned?.assigned ?? element
+              const reportedElement = assigned?.assigned ?? element;
               reportNoMatchingUnobserveTarget({ context, element: reportedElement, targetObserve: target, loc });
             }
             break;
@@ -220,9 +220,9 @@ export const createRule = (ruleName: RuleType): Rule.RuleModule => ({
   meta: {
     docs: {
       description: getDescription(ruleName),
-      category: 'Best Practices',
+      category: "Best Practices",
       recommended: true,
-      url: '',
+      url: "",
     },
     schema: [],
   },
@@ -233,12 +233,12 @@ export const createRule = (ruleName: RuleType): Rule.RuleModule => ({
     return {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      'VariableDeclarator:exit': variableDeclaratorListener(newObservers, assignedObservers),
-      'AssignmentExpression:exit': assignmentExpressionListener(newObservers, assignedObservers),
+      "VariableDeclarator:exit": variableDeclaratorListener(newObservers, assignedObservers),
+      "AssignmentExpression:exit": assignmentExpressionListener(newObservers, assignedObservers),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      'CallExpression:exit': callExpressionListener(methods),
-      'Program:exit': programListener(ruleName, methods, assignedObservers, context),
+      "CallExpression:exit": callExpressionListener(methods),
+      "Program:exit": programListener(ruleName, methods, assignedObservers, context),
     };
   },
 });

@@ -1,16 +1,16 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module"
-  },
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "settings": {
-    "import/resolver": {
-      "typescript": {}
-    }
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {  
+      "quotes": ["error", "double"], 
+      "semi": ["error", "always"]
+   }
   }
-}

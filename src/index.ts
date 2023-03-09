@@ -1,25 +1,25 @@
-import { createRule } from './rules/observers';
+import { createRule } from "./rules/observers";
 
-import { RuleType } from './utils';
+import { RuleType } from "./utils";
 
 module.exports = {
   rules: {
-    'no-missing-unobserve-or-disconnect': createRule(RuleType.NoMissingUnobserveOrDisconnect),
-    'matching-unobserve-target': createRule(RuleType.MatchingUnobserveTarget),
+    "no-missing-unobserve-or-disconnect": createRule(RuleType.NoMissingUnobserveOrDisconnect),
+    "matching-unobserve-target": createRule(RuleType.MatchingUnobserveTarget),
   },
   configs: {
     recommended: {
-      plugins: ['observers'],
+      plugins: ["observers"],
       rules: {
-        'no-missing-unobserve-or-disconnect': 'error',
-        'matching-unobserve-target': 'error',
+        "no-missing-unobserve-or-disconnect": "error",
+        "matching-unobserve-target": "error",
       },
     },
     strict: {
-      plugins: ['observers'],
+      plugins: ["observers"],
       rules: {
-        'no-missing-unobserve-or-disconnect': 'error',
-        'matching-unobserve-target': 'error',
+        "no-missing-unobserve-or-disconnect": "error",
+        "matching-unobserve-target": "error",
       },
     },
   },
