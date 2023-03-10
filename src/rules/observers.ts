@@ -17,7 +17,7 @@ import {
   getDescription,
   isNewExpression,
 } from '../utils'
-import merge = require('lodash/merge');
+import merge = require('lodash.merge')
 
 enum ObserversTypes {
   MutationObserver = 'MutationObserver',
